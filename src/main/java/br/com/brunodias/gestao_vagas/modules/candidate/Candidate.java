@@ -23,7 +23,7 @@ public class Candidate {
     private String name;
     @NotBlank
     @Pattern(regexp = "\\S+", message = "O campo [username] não deve conter espaço")
-    private String userName;
+    private String username;
     @Email(message = "O campo (email) deve ter um email valido")
     private String email;
     @Length(min = 10, max = 100)
