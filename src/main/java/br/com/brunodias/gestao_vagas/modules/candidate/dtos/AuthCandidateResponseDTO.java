@@ -1,2 +1,18 @@
-package br.com.brunodias.gestao_vagas.modules.candidate.dtos;public class AuthCandidateResponseDTO {
+package br.com.brunodias.gestao_vagas.modules.candidate.dtos;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class AuthCandidateResponseDTO {
+
+    private String access_token;
+    private Long expires_in;
+    private List<String> roles;
 }
