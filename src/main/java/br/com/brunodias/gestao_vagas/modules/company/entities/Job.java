@@ -1,5 +1,6 @@
 package br.com.brunodias.gestao_vagas.modules.company.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -21,11 +22,14 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Schema(description = "Vaga para backend developer java | spring")
     private String description;
 
+    @Schema(description = "GYMPass, Unimed")
     private String benefits;
 
     @NotBlank(message = "Esse campo é obrigatório")
+    @Schema(description = "Senior")
     private String level;
 
     @ManyToOne()

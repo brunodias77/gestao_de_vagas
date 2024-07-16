@@ -1,5 +1,6 @@
 package br.com.brunodias.gestao_vagas.modules.company.useCases;
 
+import br.com.brunodias.gestao_vagas.modules.company.dtos.AuthCompanResponseDTO;
 import br.com.brunodias.gestao_vagas.modules.company.dtos.AuthCompanyDTO;
 import br.com.brunodias.gestao_vagas.modules.company.repositories.CompanyRepository;
 import com.auth0.jwt.JWT;
@@ -26,7 +27,7 @@ public class AuthCompanyUseCase {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
+    public AuthCompanResponseDTO execute(AuthCompanyDTO authCompanyDTO) throws AuthenticationException {
 
         var company = this.companyRepository.findByUsername(authCompanyDTO.getUsername()).orElseThrow(() -> {
             throw new UsernameNotFoundException("nome de usuario ou senha incorreta");
@@ -42,7 +43,7 @@ public class AuthCompanyUseCase {
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
-        var expiresIn = Instant.now().plus(Duration.ofMinutes(10));
+        var expiresIn = Instant.now().plus(Duration.ofHours(2));
 
         // Se as senhas forem iguais, gerar o token JWT
         var token = JWT.create().withIssuer("javagas")
@@ -50,6 +51,7 @@ public class AuthCompanyUseCase {
                 .withSubject(company.getId().toString())
                 .withClaim("roles", Arrays.asList("COMPANY"))
                 .sign(algorithm);
-        return token;
+        var authCompanyResponseDTO = AuthCompanResponseDTO.builder().access_token(token).expires_in(expiresIn.toEpochMilli()).build();
+        return authCompanyResponseDTO;
     }
 }
