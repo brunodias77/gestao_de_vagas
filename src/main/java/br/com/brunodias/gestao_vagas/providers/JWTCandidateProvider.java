@@ -31,7 +31,6 @@ public class JWTCandidateProvider {
             return tokenDecoded;
         } catch (JWTVerificationException e) {
             // Em caso de falha na verificação, imprime a stack trace e retorna null.
-            e.printStackTrace();
             return null;
         }
     }
