@@ -1,5 +1,4 @@
 package br.com.brunodias.gestao_vagas;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
